@@ -1,0 +1,61 @@
+﻿<Window x:Class="Managed_NDI_Receive.MainWindow" x:Name="TheMainWindow"
+      
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        xmlns:NDI="clr-namespace:NewTek.NDI.WPF;assembly=NDIlibDotNet2"
+        Title="RECORD NDI" Height="400" Width="800"
+        FontFamily="Arial"
+   
+        
+>
+    <Grid Background="#2e3035">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="368*"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="Black" BorderBrush="Gray" BorderThickness="3" CornerRadius="8" Margin="8,16,0,16" Grid.ColumnSpan="1">
+                    <NDI:ReceiveView x:Name="ReceiveViewer" ReceiverName="WPF Example"  Margin="4" ConnectedSource="{Binding ElementName=SourcesSelector, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}"/>
+                </Border>
+                <Grid Grid.Column="1" Margin="8,22,8,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="22"/>
+                        <RowDefinition Height="*"/>
+
+
+
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+
+                    </Grid.RowDefinitions>
+                    <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock  Foreground="white" Text="{Binding ElementName=TheMainWindow, Path=FindInstance.Sources.Count, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Foreground="White" Text="NDI Sources" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+            <ListBox  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#3e4149" Name="SourcesSelector" SelectionMode="Single" Grid.Row="1" ItemsSource="{Binding}" SelectionChanged="SourcesSelector_SelectionChanged">
+                        <ListBox.DataContext>
+                            <CollectionViewSource  Source="{Binding ElementName=TheMainWindow, Path=FindInstance.Sources, UpdateSourceTrigger=PropertyChanged}" >
+                                <CollectionViewSource.SortDescriptions>
+                                    <scm:SortDescription PropertyName="Name"/>
+                                </CollectionViewSource.SortDescriptions>
+                            </CollectionViewSource>
+                        </ListBox.DataContext>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"  Foreground="White"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBlock Foreground="White" Text="Recording Controls" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2"/>
+                    <Button Grid.Row="3" Content="Start Recording" Click="Button_Click"/>
+                    <Button Grid.Row="4" Content="Pause Recording" Click="Pause_Click"/>
+                    <Button Grid.Row="5"  Content="Stop Recording" Click="Stop_Click"/>
+
+            <Button Grid.Row="6"  Content="Connect to server" Click="Server_Click"/>
+                </Grid>
+            </Grid>
+ 
+</Window>

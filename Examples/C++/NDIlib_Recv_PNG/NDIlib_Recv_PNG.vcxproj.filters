@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="LodePNG">
+      <UniqueIdentifier>{1c752a79-b8fc-4b4f-8f36-2fc2bfd63d7d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LodePNG\lodepng.cpp">
+      <Filter>LodePNG</Filter>
+    </ClCompile>
+    <ClCompile Include="NDIlib_Recv_PNG.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LodePNG\LICENSE">
+      <Filter>LodePNG</Filter>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LodePNG\lodepng.h">
+      <Filter>LodePNG</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
